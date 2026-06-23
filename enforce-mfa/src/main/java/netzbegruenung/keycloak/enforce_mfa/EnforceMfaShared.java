@@ -2,11 +2,11 @@ package netzbegruenung.keycloak.enforce_mfa;
 
 import org.keycloak.authentication.requiredactions.WebAuthnPasswordlessRegisterFactory;
 import org.keycloak.authentication.requiredactions.WebAuthnRegisterFactory;
-import org.keycloak.credential.OTPCredentialProviderFactory;
 import org.keycloak.credential.WebAuthnCredentialProviderFactory;
 import org.keycloak.credential.WebAuthnPasswordlessCredentialProviderFactory;
 import org.keycloak.models.Constants;
 import org.keycloak.models.UserModel;
+import org.keycloak.models.credential.OTPCredentialModel;
 
 import java.util.List;
 import java.util.Map;
@@ -26,10 +26,10 @@ public final class EnforceMfaShared {
 
 	/** Credential type ids for {@link MfaCredentialConditionFactory} admin UI. */
 	public static final List<String> CREDENTIAL_TYPE_OPTIONS = List.of(
-		OTPCredentialProviderFactory.PROVIDER_ID,
+		OTPCredentialModel.TYPE,
 		WebAuthnCredentialProviderFactory.PROVIDER_ID,
 		WebAuthnPasswordlessCredentialProviderFactory.PROVIDER_ID,
-		"email-authenticator", /* from mesutpiskin/keycloak-2fa-email-authenticator */
+		"email-otp-authenticator", /* from netzbegruenung/keycloak-mfa-plugins/email-authenticator */
 		"mobile-number" /* from netzbegruenung/keycloak-mfa-plugins/sms-authenticator */
 	);
 
@@ -38,8 +38,8 @@ public final class EnforceMfaShared {
 		UserModel.RequiredAction.CONFIGURE_TOTP.name(),
 		WebAuthnRegisterFactory.PROVIDER_ID,
 		WebAuthnPasswordlessRegisterFactory.PROVIDER_ID,
-		"email-authenticator-setup", /* from mesutpiskin/keycloak-2fa-email-authenticator */
-		"mobile_number_config" /* from netzbegruenung/keycloak-mfa-plugins/sms-authenticator */
+		"email-otp-authenticator-setup", /* from netzbegruenung/keycloak-mfa-plugins/email-authenticator */
+		"mobile-number-config" /* from netzbegruenung/keycloak-mfa-plugins/sms-authenticator */
 	);
 
 	/**
